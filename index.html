@@ -35,7 +35,8 @@
         .content{max-width:900px;margin:0 auto;padding:0 20px 40px}
         .tab-content{display:none}.tab-content.active{display:block}
         .phase-title{font-size:1.5rem;margin:30px 0 15px;color:#FFD700;text-align:center;padding:10px;background:rgba(255,215,0,.1);border-radius:12px;border:1px solid rgba(255,215,0,.2)}
-        .match-group-title{font-size:1.3rem;margin:25px 0 15px;color:#FFD700;border-bottom:1px solid rgba(255,215,0,.3);padding-bottom:8px}
+        .date-title{font-size:1.1rem;margin:25px 0 10px;color:#4fc3f7;padding:8px 15px;background:rgba(79,195,247,.1);border-radius:10px;border-left:4px solid #4fc3f7}
+        .match-group-tag{display:inline-block;background:rgba(255,215,0,.2);color:#FFD700;padding:2px 10px;border-radius:10px;font-size:.75rem;font-weight:700;margin-bottom:5px}
         .match-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:20px;margin-bottom:15px}
         .match-card:hover{transform:translateY(-2px);border-color:rgba(255,215,0,.3)}
         .match-info{display:flex;justify-content:space-between;font-size:.8rem;color:#888;margin-bottom:5px;flex-wrap:wrap;gap:5px}
@@ -145,10 +146,12 @@
             <div class="rules-section">
                 <h2>📖 Reglas de la Quiniela</h2>
                 <div class="rule-item"><div class="rule-icon">🎯</div><div><h3>Resultado Exacto</h3><p>Aciertas el marcador exacto (ej: 2-1 y sale 2-1)</p><span class="rule-points">+5 puntos</span></div></div>
-                <div class="rule-item"><div class="rule-icon">✅</div><div><h3>Acertar Ganador o Empate</h3><p>No aciertas marcador pero sí quién gana o empata</p><span class="rule-points">+3 puntos</span></div></div>
+                <div class="rule-item"><div class="rule-icon">✅</div><div><h3>Acertar Ganador o Empate</h3><p>No aciertas marcador pero sí quién gana o empata</p><span class="rule-points">+2 puntos</span></div></div>
+                <div class="rule-item"><div class="rule-icon">📊</div><div><h3>Acertar Diferencia de Goles</h3><p>Aciertas la diferencia (ej: pones 3-1 y sale 2-0, ambos dif de 2). Solo si acertaste ganador.</p><span class="rule-points">+2 puntos</span></div></div>
                 <div class="rule-item"><div class="rule-icon">⚽</div><div><h3>Primer Goleador</h3><p>Aciertas quién anota el primer gol del partido</p><span class="rule-points">+3 puntos</span></div></div>
                 <div class="rule-item"><div class="rule-icon">❌</div><div><h3>Fallo Total</h3><p>No aciertas nada</p><span class="rule-points">0 puntos</span></div></div>
                 <div class="rule-item"><div class="rule-icon">⏰</div><div><h3>Fecha Límite</h3><p>Debes enviar tu pronóstico ANTES del inicio de cada partido</p></div></div>
+                <div class="rule-item"><div class="rule-icon">🔥</div><div><h3>Multiplicadores por Fase</h3><p>Grupos x1 • Dieciseisavos x2 • Octavos x2 • Cuartos x3 • Semis x4 • Final x5</p><span class="rule-points">¡La final vale x5!</span></div></div>
                 <div class="rule-item"><div class="rule-icon">🏆</div><div><h3>Ganador</h3><p>El jugador con más puntos acumulados al final del torneo gana</p></div></div>
             </div>
         </div>
@@ -214,106 +217,81 @@ TBD:["Por definir",""]
 };
 
 const matches = [
-// ===== GRUPO A =====
 {id:"A1",group:"Grupo A",h:"MX",a:"ZA",date:"2026-06-11",time:"13:00",venue:"Estadio Azteca, CDMX"},
 {id:"A2",group:"Grupo A",h:"KR",a:"CZ",date:"2026-06-11",time:"19:00",venue:"Estadio Akron, Guadalajara"},
-{id:"A3",group:"Grupo A",h:"MX",a:"KR",date:"2026-06-18",time:"19:00",venue:"Estadio Akron, Guadalajara"},
-{id:"A4",group:"Grupo A",h:"CZ",a:"ZA",date:"2026-06-18",time:"10:00",venue:"Mercedes-Benz, Atlanta"},
-{id:"A5",group:"Grupo A",h:"MX",a:"CZ",date:"2026-06-24",time:"19:00",venue:"Estadio Azteca, CDMX"},
-{id:"A6",group:"Grupo A",h:"ZA",a:"KR",date:"2026-06-24",time:"19:00",venue:"Estadio BBVA, Monterrey"},
-
-// ===== GRUPO B =====
 {id:"B1",group:"Grupo B",h:"CA",a:"BA",date:"2026-06-12",time:"13:00",venue:"BMO Field, Toronto"},
+{id:"D1",group:"Grupo D",h:"US",a:"PY",date:"2026-06-12",time:"19:00",venue:"SoFi Stadium, Los Ángeles"},
 {id:"B2",group:"Grupo B",h:"QA",a:"CH",date:"2026-06-13",time:"13:00",venue:"Levi's Stadium, San Francisco"},
-{id:"B3",group:"Grupo B",h:"CA",a:"QA",date:"2026-06-18",time:"16:00",venue:"BC Place, Vancouver"},
-{id:"B4",group:"Grupo B",h:"CH",a:"BA",date:"2026-06-18",time:"13:00",venue:"SoFi Stadium, Los Ángeles"},
-{id:"B5",group:"Grupo B",h:"CA",a:"CH",date:"2026-06-24",time:"13:00",venue:"BC Place, Vancouver"},
-{id:"B6",group:"Grupo B",h:"BA",a:"QA",date:"2026-06-24",time:"13:00",venue:"Lumen Field, Seattle"},
-
-// ===== GRUPO C =====
 {id:"C1",group:"Grupo C",h:"BR",a:"MA",date:"2026-06-13",time:"16:00",venue:"MetLife Stadium, New Jersey"},
 {id:"C2",group:"Grupo C",h:"HT",a:"SCO",date:"2026-06-13",time:"19:00",venue:"Gillette Stadium, Boston"},
-{id:"C3",group:"Grupo C",h:"BR",a:"HT",date:"2026-06-19",time:"18:30",venue:"Lincoln Financial, Filadelfia"},
-{id:"C4",group:"Grupo C",h:"MA",a:"SCO",date:"2026-06-19",time:"16:00",venue:"Gillette Stadium, Boston"},
-{id:"C5",group:"Grupo C",h:"SCO",a:"BR",date:"2026-06-24",time:"16:00",venue:"Hard Rock Stadium, Miami"},
-{id:"C6",group:"Grupo C",h:"MA",a:"HT",date:"2026-06-24",time:"16:00",venue:"Mercedes-Benz, Atlanta"},
-
-// ===== GRUPO D =====
-{id:"D1",group:"Grupo D",h:"US",a:"PY",date:"2026-06-12",time:"19:00",venue:"SoFi Stadium, Los Ángeles"},
 {id:"D2",group:"Grupo D",h:"AU",a:"TR",date:"2026-06-13",time:"22:00",venue:"BC Place, Vancouver"},
-{id:"D3",group:"Grupo D",h:"US",a:"AU",date:"2026-06-19",time:"13:00",venue:"Lumen Field, Seattle"},
-{id:"D4",group:"Grupo D",h:"PY",a:"TR",date:"2026-06-19",time:"21:00",venue:"Levi's Stadium, San Francisco"},
-{id:"D5",group:"Grupo D",h:"US",a:"TR",date:"2026-06-25",time:"20:00",venue:"SoFi Stadium, Los Ángeles"},
-{id:"D6",group:"Grupo D",h:"PY",a:"AU",date:"2026-06-25",time:"20:00",venue:"Levi's Stadium, San Francisco"},
-
-// ===== GRUPO E =====
 {id:"E1",group:"Grupo E",h:"DE",a:"CW",date:"2026-06-14",time:"11:00",venue:"NRG Stadium, Houston"},
-{id:"E2",group:"Grupo E",h:"CI",a:"EC",date:"2026-06-14",time:"17:00",venue:"Lincoln Financial, Filadelfia"},
-{id:"E3",group:"Grupo E",h:"DE",a:"CI",date:"2026-06-20",time:"14:00",venue:"BMO Field, Toronto"},
-{id:"E4",group:"Grupo E",h:"CW",a:"EC",date:"2026-06-20",time:"18:00",venue:"Arrowhead Stadium, Kansas City"},
-{id:"E5",group:"Grupo E",h:"EC",a:"DE",date:"2026-06-25",time:"14:00",venue:"MetLife Stadium, New Jersey"},
-{id:"E6",group:"Grupo E",h:"CW",a:"CI",date:"2026-06-25",time:"14:00",venue:"Lincoln Financial, Filadelfia"},
-
-// ===== GRUPO F =====
 {id:"F1",group:"Grupo F",h:"NL",a:"JP",date:"2026-06-14",time:"14:00",venue:"AT&T Stadium, Dallas"},
+{id:"E2",group:"Grupo E",h:"CI",a:"EC",date:"2026-06-14",time:"17:00",venue:"Lincoln Financial, Filadelfia"},
 {id:"F2",group:"Grupo F",h:"SE",a:"TN",date:"2026-06-14",time:"22:00",venue:"Estadio BBVA, Monterrey"},
-{id:"F3",group:"Grupo F",h:"NL",a:"SE",date:"2026-06-20",time:"11:00",venue:"NRG Stadium, Houston"},
-{id:"F4",group:"Grupo F",h:"JP",a:"TN",date:"2026-06-20",time:"22:00",venue:"Estadio BBVA, Monterrey"},
-{id:"F5",group:"Grupo F",h:"TN",a:"NL",date:"2026-06-25",time:"17:00",venue:"Arrowhead Stadium, Kansas City"},
-{id:"F6",group:"Grupo F",h:"JP",a:"SE",date:"2026-06-25",time:"17:00",venue:"AT&T Stadium, Dallas"},
-
-// ===== GRUPO G =====
-{id:"G1",group:"Grupo G",h:"BE",a:"EG",date:"2026-06-15",time:"13:00",venue:"Lumen Field, Seattle"},
-{id:"G2",group:"Grupo G",h:"IR",a:"NZ",date:"2026-06-15",time:"19:00",venue:"SoFi Stadium, Los Ángeles"},
-{id:"G3",group:"Grupo G",h:"BE",a:"IR",date:"2026-06-21",time:"13:00",venue:"SoFi Stadium, Los Ángeles"},
-{id:"G4",group:"Grupo G",h:"EG",a:"NZ",date:"2026-06-21",time:"19:00",venue:"BC Place, Vancouver"},
-{id:"G5",group:"Grupo G",h:"NZ",a:"BE",date:"2026-06-26",time:"21:00",venue:"BC Place, Vancouver"},
-{id:"G6",group:"Grupo G",h:"EG",a:"IR",date:"2026-06-26",time:"21:00",venue:"Lumen Field, Seattle"},
-
-// ===== GRUPO H =====
 {id:"H1",group:"Grupo H",h:"ES",a:"CV",date:"2026-06-15",time:"10:00",venue:"Mercedes-Benz, Atlanta"},
+{id:"G1",group:"Grupo G",h:"BE",a:"EG",date:"2026-06-15",time:"13:00",venue:"Lumen Field, Seattle"},
 {id:"H2",group:"Grupo H",h:"SA",a:"UY",date:"2026-06-15",time:"16:00",venue:"Hard Rock Stadium, Miami"},
-{id:"H3",group:"Grupo H",h:"ES",a:"SA",date:"2026-06-21",time:"10:00",venue:"Mercedes-Benz, Atlanta"},
-{id:"H4",group:"Grupo H",h:"CV",a:"UY",date:"2026-06-21",time:"16:00",venue:"Hard Rock Stadium, Miami"},
-{id:"H5",group:"Grupo H",h:"UY",a:"ES",date:"2026-06-26",time:"18:00",venue:"Estadio Akron, Guadalajara"},
-{id:"H6",group:"Grupo H",h:"CV",a:"SA",date:"2026-06-26",time:"18:00",venue:"NRG Stadium, Houston"},
-
-// ===== GRUPO I =====
+{id:"G2",group:"Grupo G",h:"IR",a:"NZ",date:"2026-06-15",time:"19:00",venue:"SoFi Stadium, Los Ángeles"},
 {id:"I1",group:"Grupo I",h:"FR",a:"SN",date:"2026-06-16",time:"13:00",venue:"MetLife Stadium, New Jersey"},
 {id:"I2",group:"Grupo I",h:"IQ",a:"NO",date:"2026-06-16",time:"16:00",venue:"Gillette Stadium, Boston"},
-{id:"I3",group:"Grupo I",h:"FR",a:"IQ",date:"2026-06-22",time:"15:00",venue:"Lincoln Financial, Filadelfia"},
-{id:"I4",group:"Grupo I",h:"SN",a:"NO",date:"2026-06-22",time:"18:00",venue:"MetLife Stadium, New Jersey"},
-{id:"I5",group:"Grupo I",h:"NO",a:"FR",date:"2026-06-26",time:"13:00",venue:"Gillette Stadium, Boston"},
-{id:"I6",group:"Grupo I",h:"SN",a:"IQ",date:"2026-06-26",time:"13:00",venue:"BMO Field, Toronto"},
-
-// ===== GRUPO J =====
 {id:"J1",group:"Grupo J",h:"AR",a:"DZ",date:"2026-06-16",time:"19:00",venue:"Arrowhead Stadium, Kansas City"},
 {id:"J2",group:"Grupo J",h:"AT",a:"JO",date:"2026-06-16",time:"22:00",venue:"Levi's Stadium, San Francisco"},
-{id:"J3",group:"Grupo J",h:"AR",a:"AT",date:"2026-06-22",time:"11:00",venue:"AT&T Stadium, Dallas"},
-{id:"J4",group:"Grupo J",h:"DZ",a:"JO",date:"2026-06-22",time:"21:00",venue:"Levi's Stadium, San Francisco"},
-{id:"J5",group:"Grupo J",h:"JO",a:"AR",date:"2026-06-27",time:"20:00",venue:"AT&T Stadium, Dallas"},
-{id:"J6",group:"Grupo J",h:"DZ",a:"AT",date:"2026-06-27",time:"20:00",venue:"Arrowhead Stadium, Kansas City"},
-
-// ===== GRUPO K =====
 {id:"K1",group:"Grupo K",h:"PT",a:"CD",date:"2026-06-17",time:"11:00",venue:"NRG Stadium, Houston"},
-{id:"K2",group:"Grupo K",h:"UZ",a:"CO",date:"2026-06-17",time:"20:00",venue:"Estadio Azteca, CDMX"},
-{id:"K3",group:"Grupo K",h:"PT",a:"UZ",date:"2026-06-23",time:"11:00",venue:"NRG Stadium, Houston"},
-{id:"K4",group:"Grupo K",h:"CD",a:"CO",date:"2026-06-23",time:"20:00",venue:"Estadio Akron, Guadalajara"},
-{id:"K5",group:"Grupo K",h:"CO",a:"PT",date:"2026-06-27",time:"17:30",venue:"Hard Rock Stadium, Miami"},
-{id:"K6",group:"Grupo K",h:"CD",a:"UZ",date:"2026-06-27",time:"17:30",venue:"Mercedes-Benz, Atlanta"},
-
-// ===== GRUPO L =====
 {id:"L1",group:"Grupo L",h:"ENG",a:"HR",date:"2026-06-17",time:"14:00",venue:"AT&T Stadium, Dallas"},
 {id:"L2",group:"Grupo L",h:"GH",a:"PA",date:"2026-06-17",time:"17:00",venue:"BMO Field, Toronto"},
+{id:"K2",group:"Grupo K",h:"UZ",a:"CO",date:"2026-06-17",time:"20:00",venue:"Estadio Azteca, CDMX"},
+{id:"A4",group:"Grupo A",h:"CZ",a:"ZA",date:"2026-06-18",time:"10:00",venue:"Mercedes-Benz, Atlanta"},
+{id:"B4",group:"Grupo B",h:"CH",a:"BA",date:"2026-06-18",time:"13:00",venue:"SoFi Stadium, Los Ángeles"},
+{id:"B3",group:"Grupo B",h:"CA",a:"QA",date:"2026-06-18",time:"16:00",venue:"BC Place, Vancouver"},
+{id:"A3",group:"Grupo A",h:"MX",a:"KR",date:"2026-06-18",time:"19:00",venue:"Estadio Akron, Guadalajara"},
+{id:"D3",group:"Grupo D",h:"US",a:"AU",date:"2026-06-19",time:"13:00",venue:"Lumen Field, Seattle"},
+{id:"C4",group:"Grupo C",h:"MA",a:"SCO",date:"2026-06-19",time:"16:00",venue:"Gillette Stadium, Boston"},
+{id:"C3",group:"Grupo C",h:"BR",a:"HT",date:"2026-06-19",time:"18:30",venue:"Lincoln Financial, Filadelfia"},
+{id:"D4",group:"Grupo D",h:"PY",a:"TR",date:"2026-06-19",time:"21:00",venue:"Levi's Stadium, San Francisco"},
+{id:"F3",group:"Grupo F",h:"NL",a:"SE",date:"2026-06-20",time:"11:00",venue:"NRG Stadium, Houston"},
+{id:"E3",group:"Grupo E",h:"DE",a:"CI",date:"2026-06-20",time:"14:00",venue:"BMO Field, Toronto"},
+{id:"E4",group:"Grupo E",h:"CW",a:"EC",date:"2026-06-20",time:"18:00",venue:"Arrowhead Stadium, Kansas City"},
+{id:"F4",group:"Grupo F",h:"JP",a:"TN",date:"2026-06-20",time:"22:00",venue:"Estadio BBVA, Monterrey"},
+{id:"H3",group:"Grupo H",h:"ES",a:"SA",date:"2026-06-21",time:"10:00",venue:"Mercedes-Benz, Atlanta"},
+{id:"G3",group:"Grupo G",h:"BE",a:"IR",date:"2026-06-21",time:"13:00",venue:"SoFi Stadium, Los Ángeles"},
+{id:"H4",group:"Grupo H",h:"CV",a:"UY",date:"2026-06-21",time:"16:00",venue:"Hard Rock Stadium, Miami"},
+{id:"G4",group:"Grupo G",h:"EG",a:"NZ",date:"2026-06-21",time:"19:00",venue:"BC Place, Vancouver"},
+{id:"J3",group:"Grupo J",h:"AR",a:"AT",date:"2026-06-22",time:"11:00",venue:"AT&T Stadium, Dallas"},
+{id:"I3",group:"Grupo I",h:"FR",a:"IQ",date:"2026-06-22",time:"15:00",venue:"Lincoln Financial, Filadelfia"},
+{id:"I4",group:"Grupo I",h:"SN",a:"NO",date:"2026-06-22",time:"18:00",venue:"MetLife Stadium, New Jersey"},
+{id:"J4",group:"Grupo J",h:"DZ",a:"JO",date:"2026-06-22",time:"21:00",venue:"Levi's Stadium, San Francisco"},
+{id:"K3",group:"Grupo K",h:"PT",a:"UZ",date:"2026-06-23",time:"11:00",venue:"NRG Stadium, Houston"},
 {id:"L3",group:"Grupo L",h:"ENG",a:"GH",date:"2026-06-23",time:"14:00",venue:"Gillette Stadium, Boston"},
 {id:"L4",group:"Grupo L",h:"HR",a:"PA",date:"2026-06-23",time:"17:00",venue:"BMO Field, Toronto"},
+{id:"K4",group:"Grupo K",h:"CD",a:"CO",date:"2026-06-23",time:"20:00",venue:"Estadio Akron, Guadalajara"},
+{id:"B5",group:"Grupo B",h:"CA",a:"CH",date:"2026-06-24",time:"13:00",venue:"BC Place, Vancouver"},
+{id:"B6",group:"Grupo B",h:"BA",a:"QA",date:"2026-06-24",time:"13:00",venue:"Lumen Field, Seattle"},
+{id:"C5",group:"Grupo C",h:"SCO",a:"BR",date:"2026-06-24",time:"16:00",venue:"Hard Rock Stadium, Miami"},
+{id:"C6",group:"Grupo C",h:"MA",a:"HT",date:"2026-06-24",time:"16:00",venue:"Mercedes-Benz, Atlanta"},
+{id:"A5",group:"Grupo A",h:"MX",a:"CZ",date:"2026-06-24",time:"19:00",venue:"Estadio Azteca, CDMX"},
+{id:"A6",group:"Grupo A",h:"ZA",a:"KR",date:"2026-06-24",time:"19:00",venue:"Estadio BBVA, Monterrey"},
+{id:"E5",group:"Grupo E",h:"EC",a:"DE",date:"2026-06-25",time:"14:00",venue:"MetLife Stadium, New Jersey"},
+{id:"E6",group:"Grupo E",h:"CW",a:"CI",date:"2026-06-25",time:"14:00",venue:"Lincoln Financial, Filadelfia"},
+{id:"F5",group:"Grupo F",h:"TN",a:"NL",date:"2026-06-25",time:"17:00",venue:"Arrowhead Stadium, Kansas City"},
+{id:"F6",group:"Grupo F",h:"JP",a:"SE",date:"2026-06-25",time:"17:00",venue:"AT&T Stadium, Dallas"},
+{id:"D5",group:"Grupo D",h:"US",a:"TR",date:"2026-06-25",time:"20:00",venue:"SoFi Stadium, Los Ángeles"},
+{id:"D6",group:"Grupo D",h:"PY",a:"AU",date:"2026-06-25",time:"20:00",venue:"Levi's Stadium, San Francisco"},
+{id:"I5",group:"Grupo I",h:"NO",a:"FR",date:"2026-06-26",time:"13:00",venue:"Gillette Stadium, Boston"},
+{id:"I6",group:"Grupo I",h:"SN",a:"IQ",date:"2026-06-26",time:"13:00",venue:"BMO Field, Toronto"},
+{id:"H5",group:"Grupo H",h:"UY",a:"ES",date:"2026-06-26",time:"18:00",venue:"Estadio Akron, Guadalajara"},
+{id:"H6",group:"Grupo H",h:"CV",a:"SA",date:"2026-06-26",time:"18:00",venue:"NRG Stadium, Houston"},
+{id:"G5",group:"Grupo G",h:"NZ",a:"BE",date:"2026-06-26",time:"21:00",venue:"BC Place, Vancouver"},
+{id:"G6",group:"Grupo G",h:"EG",a:"IR",date:"2026-06-26",time:"21:00",venue:"Lumen Field, Seattle"},
 {id:"L5",group:"Grupo L",h:"PA",a:"ENG",date:"2026-06-27",time:"15:00",venue:"MetLife Stadium, New Jersey"},
 {id:"L6",group:"Grupo L",h:"HR",a:"GH",date:"2026-06-27",time:"15:00",venue:"Lincoln Financial, Filadelfia"},
+{id:"K5",group:"Grupo K",h:"CO",a:"PT",date:"2026-06-27",time:"17:30",venue:"Hard Rock Stadium, Miami"},
+{id:"K6",group:"Grupo K",h:"CD",a:"UZ",date:"2026-06-27",time:"17:30",venue:"Mercedes-Benz, Atlanta"},
+{id:"J5",group:"Grupo J",h:"JO",a:"AR",date:"2026-06-27",time:"20:00",venue:"AT&T Stadium, Dallas"},
+{id:"J6",group:"Grupo J",h:"DZ",a:"AT",date:"2026-06-27",time:"20:00",venue:"Arrowhead Stadium, Kansas City"},
 ];
 
-// ===== FASE ELIMINATORIA =====
 const knockout = [
-// DIECISEISAVOS
 {id:"R73",phase:"Dieciseisavos",h:"1B",a:"3 EFGIJ",date:"2026-06-28",time:"13:00",venue:"SoFi Stadium, Los Ángeles"},
 {id:"R74",phase:"Dieciseisavos",h:"2D",a:"2G",date:"2026-06-29",time:"14:30",venue:"Gillette Stadium, Boston"},
 {id:"R75",phase:"Dieciseisavos",h:"1J",a:"2H",date:"2026-06-29",time:"19:00",venue:"Estadio BBVA, Monterrey"},
@@ -330,8 +308,6 @@ const knockout = [
 {id:"R86",phase:"Dieciseisavos",h:"2K",a:"2L",date:"2026-07-03",time:"13:00",venue:"Por confirmar"},
 {id:"R87",phase:"Dieciseisavos",h:"2A",a:"2B",date:"2026-07-03",time:"17:00",venue:"Por confirmar"},
 {id:"R88",phase:"Dieciseisavos",h:"1C",a:"2F",date:"2026-07-03",time:"21:00",venue:"Por confirmar"},
-
-// OCTAVOS
 {id:"R89",phase:"Octavos",h:"W73",a:"W75",date:"2026-07-04",time:"14:00",venue:"Por confirmar"},
 {id:"R90",phase:"Octavos",h:"W76",a:"W77",date:"2026-07-04",time:"18:00",venue:"Por confirmar"},
 {id:"R91",phase:"Octavos",h:"W78",a:"W82",date:"2026-07-05",time:"14:00",venue:"Por confirmar"},
@@ -340,21 +316,13 @@ const knockout = [
 {id:"R94",phase:"Octavos",h:"W81",a:"W82",date:"2026-07-06",time:"18:00",venue:"Por confirmar"},
 {id:"R95",phase:"Octavos",h:"W85",a:"W88",date:"2026-07-07",time:"14:00",venue:"Por confirmar"},
 {id:"R96",phase:"Octavos",h:"W86",a:"W87",date:"2026-07-07",time:"18:00",venue:"Por confirmar"},
-
-// CUARTOS
-{id:"R97",phase:"Cuartos",h:"W89",a:"W96",date:"2026-07-09",time:"15:00",venue:"Por confirmar"},
+{id:"R97",phase:"Cuartos",h:"W89",a:"W90",date:"2026-07-09",time:"15:00",venue:"Por confirmar"},
 {id:"R98",phase:"Cuartos",h:"W91",a:"W92",date:"2026-07-09",time:"19:00",venue:"Por confirmar"},
 {id:"R99",phase:"Cuartos",h:"W93",a:"W94",date:"2026-07-10",time:"15:00",venue:"Por confirmar"},
 {id:"R100",phase:"Cuartos",h:"W95",a:"W96",date:"2026-07-10",time:"19:00",venue:"Por confirmar"},
-
-// SEMIS
 {id:"R101",phase:"Semifinales",h:"W97",a:"W98",date:"2026-07-14",time:"19:00",venue:"Por confirmar"},
 {id:"R102",phase:"Semifinales",h:"W99",a:"W100",date:"2026-07-15",time:"19:00",venue:"Por confirmar"},
-
-// TERCER LUGAR
 {id:"R103",phase:"Tercer Lugar",h:"RU101",a:"RU102",date:"2026-07-18",time:"15:00",venue:"Hard Rock Stadium, Miami"},
-
-// FINAL
 {id:"R104",phase:"FINAL",h:"W101",a:"W102",date:"2026-07-19",time:"18:00",venue:"MetLife Stadium, Nueva York"},
 ];
 // ===== VARIABLES =====
@@ -362,6 +330,26 @@ let currentUser = null;
 let isLoginMode = true;
 let currentGroupFilter = 'all';
 let isAdmin = false;
+
+// ===== MULTIPLICADORES =====
+function getMultiplier(matchId) {
+    if (matchId.startsWith('R')) {
+        const num = parseInt(matchId.replace('R', ''));
+        if (num === 104) return 5;
+        if (num === 103) return 4;
+        if (num >= 101 && num <= 102) return 4;
+        if (num >= 97 && num <= 100) return 3;
+        if (num >= 89 && num <= 96) return 2;
+        if (num >= 73 && num <= 88) return 2;
+    }
+    return 1;
+}
+
+function getMultiplierLabel(matchId) {
+    const m = getMultiplier(matchId);
+    if (m === 1) return '';
+    return `<span style="background:linear-gradient(45deg,#ff6b35,#ff3535);color:#fff;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:700;margin-left:5px;">x${m}</span>`;
+}
 
 // ===== AUTH =====
 function toggleAuthMode() {
@@ -395,7 +383,7 @@ async function handleAuth() {
             const cred = await auth.createUserWithEmailAndPassword(email, password);
             await cred.user.updateProfile({ displayName: name });
             await db.collection('users').doc(cred.user.uid).set({
-                name: name, email: email, points: 0, exactos: 0, aciertos: 0, goleadores: 0,
+                name: name, email: email, points: 0, exactos: 0, aciertos: 0, goleadores: 0, diferenciales: 0,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
         }
@@ -448,7 +436,7 @@ function switchTab(tab) {
 // ===== FILTRO DE GRUPOS =====
 function renderGroupFilter() {
     const groups = [...new Set(matches.map(m => m.group))];
-    let html = '<button class="group-filter-btn active" onclick="filterGroup(\'all\', this)">Todos</button>';
+    let html = '<button class="group-filter-btn active" onclick="filterGroup(\'all\', this)">📅 Todos</button>';
     groups.forEach(g => {
         const label = g.replace('Grupo ', '');
         html += `<button class="group-filter-btn" onclick="filterGroup('${g}', this)">${label}</button>`;
@@ -463,7 +451,7 @@ function filterGroup(group, btn) {
     renderMatches();
 }
 
-// ===== RENDER PARTIDOS =====
+// ===== RENDER PARTIDOS (ORDENADOS POR FECHA) =====
 async function renderMatches() {
     const container = document.getElementById('matchesList');
     let userPredictions = {};
@@ -479,14 +467,26 @@ async function renderMatches() {
         rSnap.forEach(doc => { results[doc.id] = doc.data(); });
     } catch(e) { console.log('Error resultados:', e); }
 
-    const filtered = currentGroupFilter === 'all' ? matches : matches.filter(m => m.group === currentGroupFilter);
+    let filtered = currentGroupFilter === 'all' ? [...matches] : matches.filter(m => m.group === currentGroupFilter);
+
+    // Ordenar por fecha y hora
+    filtered.sort((a, b) => {
+        const dateA = new Date(a.date + 'T' + a.time + ':00');
+        const dateB = new Date(b.date + 'T' + b.time + ':00');
+        return dateA - dateB;
+    });
+
     let html = '';
-    let currentGroup = '';
+    let currentDate = '';
 
     filtered.forEach(m => {
-        if (m.group !== currentGroup) {
-            currentGroup = m.group;
-            html += `<h3 class="match-group-title">🏆 ${m.group}</h3>`;
+        const dateObj = new Date(m.date + 'T' + m.time + ':00');
+        const dateKey = m.date;
+        const dateStr = dateObj.toLocaleDateString('es-MX', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+        if (dateKey !== currentDate) {
+            currentDate = dateKey;
+            html += `<div class="date-title">📅 ${dateStr}</div>`;
         }
         html += buildMatchCard(m, userPredictions, results);
     });
@@ -523,7 +523,11 @@ async function renderBracket() {
             else if (currentPhase === 'Semifinales') icon = '🟣';
             else if (currentPhase === 'Tercer Lugar') icon = '🥉';
             else if (currentPhase === 'FINAL') icon = '🏆';
-            html += `<div class="phase-title">${icon} ${currentPhase}</div>`;
+            const mult = currentPhase === 'Dieciseisavos' || currentPhase === 'Octavos' ? 'x2' :
+                         currentPhase === 'Cuartos' ? 'x3' :
+                         currentPhase === 'Semifinales' || currentPhase === 'Tercer Lugar' ? 'x4' :
+                         currentPhase === 'FINAL' ? 'x5' : '';
+            html += `<div class="phase-title">${icon} ${currentPhase} <span style="background:linear-gradient(45deg,#ff6b35,#ff3535);color:#fff;padding:3px 12px;border-radius:12px;font-size:.85rem;">Puntos ${mult}</span></div>`;
         }
         html += buildKnockoutCard(m, userPredictions, results);
     });
@@ -543,52 +547,16 @@ function buildMatchCard(m, userPredictions, results) {
     const saved = pred ? 'saved' : '';
     const savedText = pred ? '✅ Guardado' : '💾 Guardar';
     const hasResult = result && result.scoreHome !== undefined;
-
-    const dateObj = new Date(m.date + 'T' + m.time + ':00');
-    const dateStr = dateObj.toLocaleDateString('es-MX', { weekday:'short', day:'numeric', month:'short' });
-
-    let resultHTML = '';
-    if (hasResult) {
-        resultHTML = `<div class="result-badge">⚽ Resultado: ${result.scoreHome} - ${result.scoreAway}`;
-        if (result.firstScorer) resultHTML += ` | Gol: ${result.firstScorer}`;
-        resultHTML += `</div>`;
-        if (pred) {
-            const pts = calculatePoints(pred, result);
-            resultHTML += `<div style="text-align:center;margin-top:8px;font-size:.85rem;color:${pts > 0 ? '#28a745' : '#ff6b6b'}">`;
-            if (pts >= 8) resultHTML += `🎯 ¡Exacto + Goleador! +${pts} pts`;
-            else if (pts === 5) resultHTML += `🎯 ¡Resultado exacto! +${pts} pts`;
-            else if (pts === 6) resultHTML += `✅ Ganador + goleador! +${pts} pts`;
-            else if (pts === 3) resultHTML += `✅ +${pts} pts`;
-            else resultHTML += `❌ +0 pts`;
-            resultHTML += `</div>`;
-        }
-    }
-
     const disabled = hasResult ? 'disabled' : '';
     const inputStyle = hasResult ? 'opacity:0.5;' : '';
 
-    let adminHTML = '';
-    if (isAdmin) {
-        const rH = hasResult ? result.scoreHome : '';
-        const rA = hasResult ? result.scoreAway : '';
-        const rS = hasResult ? (result.firstScorer || '') : '';
-        adminHTML = `
-        <div class="admin-panel">
-            <h4>👑 Admin - Resultado Real</h4>
-            <div class="admin-inputs">
-                <input type="number" id="rh_${m.id}" min="0" max="20" value="${rH}" placeholder="0">
-                <span style="color:#ff6b6b;font-weight:700">—</span>
-                <input type="number" id="ra_${m.id}" min="0" max="20" value="${rA}" placeholder="0">
-                <input type="text" id="rs_${m.id}" value="${rS}" placeholder="Primer goleador">
-            </div>
-            <button class="btn-admin" onclick="saveResult('${m.id}')">📝 Guardar resultado</button>
-        </div>`;
-    }
+    let resultHTML = buildResultHTML(m.id, pred, result);
+    let adminHTML = buildAdminHTML(m.id, result);
 
     return `
     <div class="match-card">
         <div class="match-info">
-            <span>📅 ${dateStr} • ⏰ ${m.time} hrs</span>
+            <span><span class="match-group-tag">${m.group}</span> ⏰ ${m.time} hrs ${getMultiplierLabel(m.id)}</span>
             <span>🏟️ ${m.venue}</span>
         </div>
         <div class="teams">
@@ -627,46 +595,14 @@ function buildKnockoutCard(m, userPredictions, results) {
     const saved = pred ? 'saved' : '';
     const savedText = pred ? '✅ Guardado' : '💾 Guardar';
     const hasResult = result && result.scoreHome !== undefined;
+    const disabled = hasResult ? 'disabled' : '';
+    const inputStyle = hasResult ? 'opacity:0.5;' : '';
 
     const dateObj = new Date(m.date + 'T' + m.time + ':00');
     const dateStr = dateObj.toLocaleDateString('es-MX', { weekday:'short', day:'numeric', month:'short' });
 
-    const disabled = hasResult ? 'disabled' : '';
-    const inputStyle = hasResult ? 'opacity:0.5;' : '';
-
-    let resultHTML = '';
-    if (hasResult) {
-        resultHTML = `<div class="result-badge">⚽ Resultado: ${result.scoreHome} - ${result.scoreAway}`;
-        if (result.firstScorer) resultHTML += ` | Gol: ${result.firstScorer}`;
-        resultHTML += `</div>`;
-        if (pred) {
-            const pts = calculatePoints(pred, result);
-            resultHTML += `<div style="text-align:center;margin-top:8px;font-size:.85rem;color:${pts > 0 ? '#28a745' : '#ff6b6b'}">`;
-            if (pts >= 8) resultHTML += `🎯 +${pts} pts`;
-            else if (pts === 5) resultHTML += `🎯 ¡Exacto! +${pts} pts`;
-            else if (pts === 3) resultHTML += `✅ +${pts} pts`;
-            else resultHTML += `❌ +0 pts`;
-            resultHTML += `</div>`;
-        }
-    }
-
-    let adminHTML = '';
-    if (isAdmin) {
-        const rH = hasResult ? result.scoreHome : '';
-        const rA = hasResult ? result.scoreAway : '';
-        const rS = hasResult ? (result.firstScorer || '') : '';
-        adminHTML = `
-        <div class="admin-panel">
-            <h4>👑 Admin - Resultado Real</h4>
-            <div class="admin-inputs">
-                <input type="number" id="rh_${m.id}" min="0" max="20" value="${rH}" placeholder="0">
-                <span style="color:#ff6b6b;font-weight:700">—</span>
-                <input type="number" id="ra_${m.id}" min="0" max="20" value="${rA}" placeholder="0">
-                <input type="text" id="rs_${m.id}" value="${rS}" placeholder="Primer goleador">
-            </div>
-            <button class="btn-admin" onclick="saveResult('${m.id}')">📝 Guardar resultado</button>
-        </div>`;
-    }
+    let resultHTML = buildResultHTML(m.id, pred, result);
+    let adminHTML = buildAdminHTML(m.id, result);
 
     const isFinal = m.phase === 'FINAL';
     const cardStyle = isFinal ? 'border:2px solid #FFD700;background:rgba(255,215,0,.08);' : '';
@@ -674,7 +610,7 @@ function buildKnockoutCard(m, userPredictions, results) {
     return `
     <div class="match-card" style="${cardStyle}">
         <div class="match-info">
-            <span>📅 ${dateStr} • ⏰ ${m.time} hrs</span>
+            <span>📅 ${dateStr} • ⏰ ${m.time} hrs ${getMultiplierLabel(m.id)}</span>
             <span>🏟️ ${m.venue}</span>
         </div>
         <div class="teams">
@@ -700,23 +636,88 @@ function buildKnockoutCard(m, userPredictions, results) {
         ${adminHTML}
     </div>`;
 }
-// ===== CALCULAR PUNTOS =====
-function calculatePoints(pred, result) {
-    let pts = 0;
+
+// ===== BUILD RESULT HTML =====
+function buildResultHTML(matchId, pred, result) {
+    const hasResult = result && result.scoreHome !== undefined;
+    if (!hasResult) return '';
+
+    let html = `<div class="result-badge">⚽ Resultado: ${result.scoreHome} - ${result.scoreAway}`;
+    if (result.firstScorer) html += ` | Gol: ${result.firstScorer}`;
+    html += `</div>`;
+
+    if (pred) {
+        const mult = getMultiplier(matchId);
+        const bd = calculatePointsDetailed(pred, result);
+        const totalPts = bd.total * mult;
+
+        html += `<div style="text-align:center;margin-top:8px;font-size:.85rem;">`;
+        if (bd.exact) html += `<span style="color:#FFD700">🎯 Exacto +5</span> `;
+        else if (bd.winner) html += `<span style="color:#28a745">✅ Ganador +2</span> `;
+        if (bd.differential && !bd.exact) html += `<span style="color:#17a2b8">📊 Diferencial +2</span> `;
+        if (bd.scorer) html += `<span style="color:#ffc107">⚽ Goleador +3</span> `;
+        if (bd.total === 0) html += `<span style="color:#ff6b6b">❌ +0</span>`;
+        if (mult > 1) html += `<br><span style="color:#ff6b35;font-weight:700;">x${mult} = ${totalPts} pts 🔥</span>`;
+        else html += `<br><span style="color:#28a745;font-weight:700;">= ${totalPts} pts</span>`;
+        html += `</div>`;
+    }
+    return html;
+}
+
+// ===== BUILD ADMIN HTML =====
+function buildAdminHTML(matchId, result) {
+    if (!isAdmin) return '';
+    const hasResult = result && result.scoreHome !== undefined;
+    const rH = hasResult ? result.scoreHome : '';
+    const rA = hasResult ? result.scoreAway : '';
+    const rS = hasResult ? (result.firstScorer || '') : '';
+    return `
+    <div class="admin-panel">
+        <h4>👑 Admin - Resultado Real</h4>
+        <div class="admin-inputs">
+            <input type="number" id="rh_${matchId}" min="0" max="20" value="${rH}" placeholder="0">
+            <span style="color:#ff6b6b;font-weight:700">—</span>
+            <input type="number" id="ra_${matchId}" min="0" max="20" value="${rA}" placeholder="0">
+            <input type="text" id="rs_${matchId}" value="${rS}" placeholder="Primer goleador">
+        </div>
+        <button class="btn-admin" onclick="saveResult('${matchId}')">📝 Guardar resultado</button>
+    </div>`;
+}
+
+// ===== CALCULAR PUNTOS DETALLADO =====
+function calculatePointsDetailed(pred, result) {
+    let total = 0;
+    let exact = false, winner = false, differential = false, scorer = false;
+
     const pH = pred.scoreHome, pA = pred.scoreAway;
     const rH = result.scoreHome, rA = result.scoreAway;
 
-    if (pH === rH && pA === rA) pts += 5;
-    else {
+    if (pH === rH && pA === rA) {
+        exact = true;
+        total += 5;
+    } else {
         const predResult = pH > pA ? 'H' : (pH < pA ? 'A' : 'D');
         const realResult = rH > rA ? 'H' : (rH < rA ? 'A' : 'D');
-        if (predResult === realResult) pts += 3;
+        if (predResult === realResult) {
+            winner = true;
+            total += 2;
+            const predDiff = Math.abs(pH - pA);
+            const realDiff = Math.abs(rH - rA);
+            if (predDiff === realDiff) {
+                differential = true;
+                total += 2;
+            }
+        }
     }
 
     if (pred.firstScorer && result.firstScorer) {
-        if (pred.firstScorer.toLowerCase().trim() === result.firstScorer.toLowerCase().trim()) pts += 3;
+        if (pred.firstScorer.toLowerCase().trim() === result.firstScorer.toLowerCase().trim()) {
+            scorer = true;
+            total += 3;
+        }
     }
-    return pts;
+
+    return { total, exact, winner, differential, scorer };
 }
 
 // ===== GUARDAR PRONÓSTICO =====
@@ -757,7 +758,7 @@ async function savePrediction(matchId) {
     }
 }
 
-// ===== ADMIN: GUARDAR RESULTADO REAL =====
+// ===== ADMIN: GUARDAR RESULTADO =====
 async function saveResult(matchId) {
     if (!isAdmin) return;
     const scoreHome = document.getElementById('rh_' + matchId).value;
@@ -778,40 +779,29 @@ async function saveResult(matchId) {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        // Recalcular puntos de todos los usuarios
         const predSnap = await db.collection('predictions').where('matchId', '==', matchId).get();
         const result = { scoreHome: parseInt(scoreHome), scoreAway: parseInt(scoreAway), firstScorer: firstScorer };
+        const mult = getMultiplier(matchId);
 
-        // Primero resetear puntos de este partido si ya se había guardado antes
         for (const predDoc of predSnap.docs) {
             const pred = predDoc.data();
-            const pts = calculatePoints(pred, result);
+            const bd = calculatePointsDetailed(pred, result);
+            const totalPts = bd.total * mult;
 
-            const userRef = db.collection('users').doc(pred.userId);
-            const userDoc = await userRef.get();
-
-            if (userDoc.exists) {
-                const userData = userDoc.data();
-                const isExact = (pred.scoreHome === result.scoreHome && pred.scoreAway === result.scoreAway);
-                const isWinner = pts >= 3 && !isExact;
-                const isScorer = pred.firstScorer && result.firstScorer &&
-                    pred.firstScorer.toLowerCase().trim() === result.firstScorer.toLowerCase().trim();
-
-                // Guardar puntos de este partido específico para poder recalcular
-                await db.collection('matchPoints').doc(pred.userId + '_' + matchId).set({
-                    userId: pred.userId,
-                    matchId: matchId,
-                    points: pts,
-                    exact: isExact,
-                    winner: isWinner,
-                    scorer: isScorer
-                });
-            }
+            await db.collection('matchPoints').doc(pred.userId + '_' + matchId).set({
+                userId: pred.userId,
+                matchId: matchId,
+                points: totalPts,
+                basePoints: bd.total,
+                multiplier: mult,
+                exact: bd.exact,
+                winner: bd.winner,
+                differential: bd.differential,
+                scorer: bd.scorer
+            });
         }
 
-        // Recalcular totales de todos los usuarios
         await recalculateAllPoints();
-
         showNotification('✅ Resultado guardado y puntos actualizados', 'success');
         renderMatches();
         loadLeaderboard();
@@ -821,38 +811,27 @@ async function saveResult(matchId) {
     }
 }
 
-// ===== RECALCULAR TODOS LOS PUNTOS =====
+// ===== RECALCULAR PUNTOS =====
 async function recalculateAllPoints() {
     try {
         const usersSnap = await db.collection('users').get();
-
         for (const userDoc of usersSnap.docs) {
             const userId = userDoc.id;
             const pointsSnap = await db.collection('matchPoints').where('userId', '==', userId).get();
-
-            let totalPoints = 0;
-            let totalExactos = 0;
-            let totalAciertos = 0;
-            let totalGoleadores = 0;
-
+            let tp = 0, te = 0, ta = 0, tg = 0, td = 0;
             pointsSnap.forEach(doc => {
                 const d = doc.data();
-                totalPoints += d.points || 0;
-                if (d.exact) totalExactos++;
-                if (d.winner) totalAciertos++;
-                if (d.scorer) totalGoleadores++;
+                tp += d.points || 0;
+                if (d.exact) te++;
+                if (d.winner) ta++;
+                if (d.scorer) tg++;
+                if (d.differential) td++;
             });
-
             await db.collection('users').doc(userId).update({
-                points: totalPoints,
-                exactos: totalExactos,
-                aciertos: totalAciertos,
-                goleadores: totalGoleadores
+                points: tp, exactos: te, aciertos: ta, goleadores: tg, diferenciales: td
             });
         }
-    } catch (e) {
-        console.error('Error recalculando puntos:', e);
-    }
+    } catch (e) { console.error('Error recalculando:', e); }
 }
 
 // ===== TABLA DE POSICIONES =====
